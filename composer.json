@@ -1,0 +1,30 @@
+{
+    "name": "xiyusullos/nullable",
+    "type": "library",
+    "description": "chain calls on object whatever the object is null or not",
+    "keywords": ["null", "object", "chain"],
+    "homepage": "https://github.com/xiyusullos/nullable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiyusullos",
+            "email": "i@xy-jit.cc"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "xiyusullos\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "xiyusullos\\Test\\": "test/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    }
+}
