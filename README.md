@@ -8,7 +8,9 @@ Install the latest version with
 composer require xiyusullos/nullable
 ```
 
-## Basic Usage
+## Usage
+
+### Basic Usage
 
 ```php
 <?php
@@ -24,6 +26,70 @@ class Obj
 
 $obj = new Obj();
 echo $obj->a->b->c;
+```
+
+### Laravel Usage
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use xiyusullos\Nullable;
+
+class Profile extends Model
+{
+    // supposed an attribute of departmentName
+    use Nullable;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // ...
+}
+
+class User extends Model
+{
+    use Nullable;
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // ...
+ }
+
+class Blog extends Model
+{
+    use Nullable;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // ...
+}
+
+// wanna get the writer's department name who posted the blog #1
+
+// without Nullable
+$blog = Blog::find(1);
+$user = $blog->user;
+if ($user) {
+    $profile = $user->profile;
+    if ($profile) {
+        $departmentName = (string) $profile->departmentName;
+    }
+} // that's so annoying!
+
+// with Nullable
+$blog = Blog::find(1);
+$departmentName = (string) $blog->user->profile->departmentName;
 ```
 
 ## About

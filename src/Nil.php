@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by xiyusullos.
- * Created at 2017-03-22 13:13
+ * Created at 2017-03-23 01:57
  *
  * @author    xiyusullos <i@xy-jit.cc>
  * @copyright Copyright (C) 2017 xiyusullos.
@@ -10,33 +10,42 @@
 
 namespace xiyusullos;
 
+
 /**
- * Class Nullable
+ * Class Nil
  * @package xiyusullos
  */
-trait Nullable
+class Nil implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable
 {
+    /**
+     * The constructor.
+     */
+    public function __construct()
+    {
+        // do nothing.
+    }
+
     /**
      * Does nothing when invoking a inaccessible method in a static context.
      *
      * @param string $name The name of the method being called.
      * @param mixed[] $arguments The arguments of the method being called.
      *
-     * @return Nil|mixed Always returns a new instance of static.
+     * @return Nil Always returns a new instance of static.
      */
     public static function __callStatic($name, $arguments)
     {
-        return is_callable(['parent', '__callStatic']) ? parent::__callStatic($name, $arguments) : new Nil();
+        return new static();
     }
 
     /**
      * Invokes this class as a function.
      *
-     * @return Nil|mixed Always returns $this.
+     * @return Nil Always returns $this.
      */
     public function __invoke()
     {
-        return is_callable(['parent', '__invoke']) ? parent::__invoke() : new Nil();
+        return $this;
     }
 
     /**
@@ -45,11 +54,11 @@ trait Nullable
      * @param string $name The name of the method being called.
      * @param mixed[] $arguments The arguments of the method being called.
      *
-     * @return Nil|mixed Always returns $this.
+     * @return Nil Always returns $this.
      */
     public function __call($name, $arguments)
     {
-        return is_callable(['parent', '__call']) ? parent::__call($name, $arguments) : new Nil();
+        return $this;
     }
 
     /**
@@ -57,17 +66,11 @@ trait Nullable
      *
      * @param string $name The property name.
      *
-     * @return Nil|mixed Always returns $this.
+     * @return Nil Always returns $this.
      */
     public function __get($name)
     {
-        $value = is_callable(['parent', '__get']) ? parent::__get($name) : new Nil();
-
-        if (is_null($value)) {
-            $value = new Nil();
-        }
-
-        return $value;
+        return $this;
     }
 
     /**
@@ -78,7 +81,7 @@ trait Nullable
      */
     public function __set($name, $value)
     {
-        is_callable(['parent', '__set']) ? parent::__set($name, $value) : '';
+        // do nothing.
     }
 
     /**
@@ -88,7 +91,7 @@ trait Nullable
      */
     public function __toString()
     {
-        return is_callable(['parent', '__toString']) ? parent::__toString() : '';
+        return (string) null;
     }
 
     /**
@@ -106,7 +109,7 @@ trait Nullable
      */
     public function __sleep()
     {
-        return is_callable(['parent', '__sleep']) ? parent::__sleep() : [];
+        return [];
     }
 
     /**
@@ -116,7 +119,7 @@ trait Nullable
      */
     public function __wakeup()
     {
-        return is_callable(['parent', '__wakeup']) ? parent::__wakeup() : new Nil();
+        return $this;
     }
 
     /**
@@ -136,7 +139,7 @@ trait Nullable
      */
     public function current()
     {
-        return new Nil();
+        return $this;
     }
 
     /**
@@ -154,7 +157,7 @@ trait Nullable
      */
     public function key()
     {
-        return new Nil();
+        return $this;
     }
 
     /**
@@ -196,7 +199,7 @@ trait Nullable
      */
     public function offsetGet($offset)
     {
-        return new Nil();
+        return $this;
     }
 
     /**
