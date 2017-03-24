@@ -2,7 +2,7 @@
     "name": "xiyusullos/nullable",
     "type": "library",
     "description": "chain calls on object whatever the object is null or not",
-    "keywords": ["null", "object", "chain"],
+    "keywords": ["null object", "chain calls", "laravel", "eloquent"],
     "homepage": "https://github.com/xiyusullos/nullable",
     "license": "MIT",
     "authors": [
